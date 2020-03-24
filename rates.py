@@ -8,8 +8,14 @@ import matplotlib.ticker as mtick
 from population_database import population
 
 def get_timeline(subj):
+    filenames = {
+        "Confirmed": "time_series_covid19_confirmed_global.csv", 
+        "Deaths": "time_series_covid19_deaths_global.csv", 
+        "Recovered": "time_series_19-covid-Recovered.csv"
+    }
+
     # Load data from CSV
-    df_base = pd.read_csv('csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-%s.csv' % subj)  
+    df_base = pd.read_csv('csse_covid_19_data/csse_covid_19_time_series/' + filenames[subj])  
     df_base.set_index(["Province/State", "Country/Region"])
     df_base.drop(["Lat", "Long"], inplace=True, axis=1)
 
