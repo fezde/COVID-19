@@ -36,6 +36,8 @@ fig, axes = plt.subplots(
         ncols=3,
         figsize=(25,10) 
     )
+fig.suptitle("Recovery and Mortality Rates", fontsize=16)
+
 
 df_confirmed = get_timeline("Confirmed")
 topTen = df_confirmed.max().sort_values(ascending=False).head(10).index.tolist()

@@ -14,6 +14,7 @@ fig, axes = plt.subplots(
         ncols=3,
         figsize=(25,10) 
     )
+fig.suptitle("Basic Numbers", fontsize=16)
 
 filenames = {
     "Confirmed": "time_series_covid19_confirmed_global.csv", 
