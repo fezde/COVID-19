@@ -18,22 +18,22 @@ logging.debug("matplotlibrc is used from '%s'" % (matplotlib.matplotlib_fname())
 def save_chart(fig, name):
     extension = "png"
     basePath = "charts/%s" % name
-    currentPath = "charts/_current"
+    webPath = "docs/charts"
 
     if not path.isdir(basePath):
         logging.info("Creating path for chart: %s" % basePath)
         mkdir(basePath)
-    if not path.isdir(currentPath):
-        logging.info("Creating path for chart: %s" % currentPath)
-        mkdir(currentPath)
+    if not path.isdir(webPath):
+        logging.info("Creating path for chart: %s" % webPath)
+        mkdir(webPath)
     
     fileName = "%s/%s-%s.%s" % (basePath, name, datetime.now().strftime("%Y%m%d-%H%M%S"), extension)
-    currentName = "%s/%s.%s" % (currentPath, name, extension)
-    logging.debug("Saving chart to: '%s' and '%s" % (fileName, currentName))
+    webName = "%s/%s.%s" % (webPath, name, extension)
+    logging.debug("Saving chart to: '%s' and '%s" % (fileName, webName))
 
     fig.savefig(
         fileName, 
         bbox_inches='tight'
     )
 
-    copyfile(fileName, currentName)
+    copyfile(fileName, webName)
