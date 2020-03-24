@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
 
         <style>
             .row {
@@ -14,9 +15,11 @@
                 box-shadow:  0px -11px 23px 0px rgba(0,0,0,0.75);
             }
         </style>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col">
                     <p>Some kind of introduction....</p>
@@ -26,16 +29,50 @@
                 <div class="col-12 d-sm-block d-xs-block d-lg-none">
                     <h1>Basic Numbers</h1>
                 </div>
-                <div class="col-lg-9 col-12">
-                    <img class="img-fluid" src="charts/basic_numbers.png">
+                <div class="col-lg-8 col-12">
+                    <a href="charts/basic_numbers.png" data-toggle="lightbox" data-gallery="allcharts">
+                        <img class="img-fluid" src="charts/basic_numbers.png">
+                    </a>
+                    
                 </div>
-                <div class="col-lg-3 col12">
+                <div class="col-lg-4 col12">
                     <h1 class="d-none d-lg-block" >Basic Numbers</h1>
                     <p>
-                        Hallo Welt
+                        This chart aims at better understanding what the current infections mean for a certain country. While news reports (or other analyses) usually report the total number of infections per country, that does not really reflect the severness of such an infection. 80.000 infected people means something completely different for a country like China than for a country like Switzerland.
+                    </p>
+                    <p>
+                        <strong>A little example:</strong><br/>
+                        <ul>
+                            <li>80.000 infected inhabitants in China represent about <strong>0.006%</strong> of the population while the sames</li>
+                            <li>80.000 infected inhabitants in Switzerland represent about <strong>0.933%</strong> of their population.</li>
+                        </ul>
+                        
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 d-sm-block d-xs-block d-lg-none">
+                    <h1>Recovery and Mortality Rates</h1>
+                </div>
+                <div class="col-lg-4 col12">
+                    <h1 class="d-none d-lg-block" >Healing and Mortality Rates</h1>
+                    <p>
+                        In its bottom line this chart shows two different rates:
+                        <ul>
+                            <li><strong>Mortality Rate</strong>: Deaths / Confirmed</li>
+                            <li><strong>Recovery Rate</strong>: Recovered / Confirmed</li>
+                        </ul>
+                        On the top row the absolute numbers are shown. Both rows show the countries with the highest total number in the given category.
                     </p>
                     
                 </div>
+                <div class="col-lg-8 col-12">
+                    <a href="charts/rates.png" data-toggle="lightbox" data-gallery="allcharts">
+                        <img class="img-fluid" src="charts/rates.png">
+                    </a>
+                </div>
+                
             </div>
             <div class="row">
                 <div class="col">
@@ -64,9 +101,15 @@
             </div>
         </div>
         
-
+        <script>
+            $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+        </script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha256-Y1rRlwTzT5K5hhCBfAFWABD4cU13QGuRN6P5apfWzVs=" crossorigin="anonymous"></script>
     </body>
 </html>
