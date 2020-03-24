@@ -6,6 +6,7 @@ import matplotlib
 from shutil import copyfile
 from PIL import Image, ImageDraw, ImageFont
 from PIL.PngImagePlugin import  PngInfo
+import math
 
 
 FORMAT = '%(asctime)-15s [%(levelname)7s] - %(name)s - %(message)s'
@@ -31,7 +32,9 @@ def save_chart(fig, name):
         mkdir(webPath)
     
     fileName = "%s/%s-%s.%s" % (basePath, name, datetime.now().strftime("%Y%m%d-%H%M%S"), extension)
+    
     webName = "%s/%s.%s" % (webPath, name, extension)
+    fileNameSmall = "%s/%s_small.%s" % (webPath, name, extension)
     logging.debug("Saving chart to: '%s' and '%s" % (fileName, webName))
 
     fig.savefig(
@@ -62,5 +65,8 @@ def save_chart(fig, name):
 
     
     img_new.save(fileName, pnginfo=metadata)
+
+    img_small = img_new.resize((math.floor(img_new.width * 0.4), math.floor(img_new.height * 0.4)), Image.ANTIALIAS)
+    img_small.save(fileNameSmall, pnginfo=metadata)
 
     copyfile(fileName, webName)
