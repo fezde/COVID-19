@@ -8,11 +8,6 @@ import matplotlib.ticker as mtick
 from population_database import population
 
 
-thresholds = {
-    "Confirmed": 10000, 
-    "Deaths": 100, 
-    "Recovered": 100
-}
 idx = 0
 fig, axes = plt.subplots(
         nrows=2, 
