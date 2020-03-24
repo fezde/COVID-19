@@ -40,7 +40,7 @@ df_confirmed_filtered.plot(
         lw=3)
 
 titles = {
-    "Recovered": "Healing Rate",
+    "Recovered": "Recovery Rate",
     "Deaths": "Mortality Rate"
 }
 
