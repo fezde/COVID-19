@@ -26,7 +26,7 @@ def get_timeline(subj):
     df_base = df_base.transpose()
     
     # Drop "countries" that we will not handle
-    df_base.drop(["Cruise Ship"], inplace=True, axis=1)
+    # df_base.drop(["Cruise Ship"], inplace=True, axis=1)
 
     return df_base
 

@@ -38,7 +38,7 @@ for subj in ["Confirmed", "Deaths", "Recovered"]:
     df_base = df_base.transpose()
     
     # Drop "countries" that we will not handle
-    df_base.drop(["Cruise Ship"], inplace=True, axis=1)
+    # df_base.drop(["Cruise Ship"], inplace=True, axis=1)
 
     # Create first chart
     df_chart_total = df_base
