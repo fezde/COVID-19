@@ -13,11 +13,6 @@ class Post extends Component {
         const image = data.allFile.edges.find(
             edge => edge.node.name === this.props.image
         )
-        // if (!image) {
-        //     console.log("No image")
-        // }else{
-        //     console.log("image")
-        // }
         console.log(data);
         console.log(image);
         return(

@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: "/gatsby-react-bootstrap-starter",
+  pathPrefix: "/COVID-19",
   siteMetadata: {
     title: `Visualizing COVID-19 data`,
     description: `A starter that includes react-bootstrap and react-icons, along with SASS compilation.`,
