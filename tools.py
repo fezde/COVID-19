@@ -22,7 +22,7 @@ logging.debug("matplotlibrc is used from '%s'" % (matplotlib.matplotlib_fname())
 def save_chart(fig, name):
     extension = "png"
     basePath = "charts/%s" % name
-    webPath = "docs/charts"
+    webPath = "charts/_current"
 
     if not path.isdir(basePath):
         logging.info("Creating path for chart: %s" % basePath)
