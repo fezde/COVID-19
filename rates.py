@@ -11,7 +11,7 @@ def get_timeline(subj):
     filenames = {
         "Confirmed": "time_series_covid19_confirmed_global.csv", 
         "Deaths": "time_series_covid19_deaths_global.csv", 
-        "Recovered": "time_series_19-covid-Recovered.csv"
+        "Recovered": "time_series_covid19_recovered_global.csv"
     }
 
     # Load data from CSV

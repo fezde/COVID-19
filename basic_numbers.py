@@ -19,7 +19,7 @@ fig.suptitle("Basic Numbers", fontsize=16)
 filenames = {
     "Confirmed": "time_series_covid19_confirmed_global.csv", 
     "Deaths": "time_series_covid19_deaths_global.csv", 
-    "Recovered": "time_series_19-covid-Recovered.csv"
+    "Recovered": "time_series_covid19_recovered_global.csv"
 }
 
 for subj in ["Confirmed", "Deaths", "Recovered"]:
