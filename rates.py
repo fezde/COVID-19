@@ -32,9 +32,9 @@ def get_timeline(subj):
 
 idx = 1
 fig, axes = plt.subplots(
-        nrows=2, 
+        nrows=3, 
         ncols=3,
-        figsize=(25,10) 
+        figsize=(25,15) 
     )
 fig.suptitle("Recovery and Mortality Rates", fontsize=16)
 
@@ -53,6 +53,8 @@ titles = {
 }
 
 axes[1,0].axis('off')
+axes[2,0].axis('off')
+axes[2,2].axis('off')
 
 for subj in ["Deaths", "Recovered"]:
     logging.debug("Analysing %s" % subj)
@@ -74,6 +76,14 @@ for subj in ["Deaths", "Recovered"]:
         title=titles[subj], 
         lw=3)
     ax2.yaxis.set_major_formatter(mtick.PercentFormatter())
+
+    if subj == "Deaths":
+        ax3 = df_chart_total.plot(
+            ax=axes[2, idx],
+            title=titles[subj] + " (zoomed)", 
+            lw=3)
+        ax3.yaxis.set_major_formatter(mtick.PercentFormatter())
+        ax3.set_ylim(0, 25)
 
     df_base_filtered.plot(
         ax=axes[0, idx],
