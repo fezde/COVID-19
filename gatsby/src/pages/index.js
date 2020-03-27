@@ -13,7 +13,7 @@ const IndexPage = ({ data }) => (
             <Row>
                 <Col>
                     <p>
-                        This page tries to visualize the COVID-19 data provided by the Johns Hopkins University.
+                        This page aims to visualize the COVID-19 pandemy using data provided by the Johns Hopkins University.
           </p>
                     <p>
                         While many pages visualize the current data on different levels, I have not yet seen any page that tries to focus on visualizing the timeline on a per-country level. This page shows the results of my visualizations.

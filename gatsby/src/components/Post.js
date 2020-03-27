@@ -25,7 +25,7 @@ class Post extends Component {
                 <Row>
                     <div style={{
                         background: "#000000af",
-                        position: "absolute",
+                        position: "fixed",
                         width: "100vw",
                         height: "100vh",
                         top: 0,
@@ -35,7 +35,16 @@ class Post extends Component {
                     }}
                     onClick={(event) => { this.setState({showOverlay: !this.state.showOverlay }); }}
                     >
-                        <Image src={image.node.publicURL} fluid  />
+                        <Image src={image.node.publicURL}
+                            fluid  
+                            style = {{
+                                maxWidth: "90vw",
+                                position: "absolute",
+                                left: "50vw",
+                                top: "50vh",
+                                transform: "translate(-50%, -50%)"
+                            }}
+                            />
                     </div>
                     <Col sm={8}>
                         <a 
@@ -43,7 +52,9 @@ class Post extends Component {
                         onClick={(event) => { this.setState({showOverlay: !this.state.showOverlay }); }}
                         href="#"
                         >
-                            <Image src={image_small.node.publicURL} fluid  /><br/>
+                            <Image src={image_small.node.publicURL} 
+                                fluid  
+                            /><br/>
                         
                             (Click to enlarge)
                         </a>
