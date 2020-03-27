@@ -7,9 +7,9 @@ python3 basic_numbers.py
 python3 rates.py
 
 cd gatsby
+gatsby clean
 npm run deploy
 cd ..
-
 
 git add charts/**/*.png
 git commit -m "Updated data"
