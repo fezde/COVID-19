@@ -61,7 +61,17 @@ class Post extends Component {
                     </Col>
                     <Col sm={4}>
                         <h3>{this.props.title}</h3>
-                        <p align="left" dangerouslySetInnerHTML={{__html: this.props.content}}></p>
+                        {/* <p dangerouslySetInnerHTML={{__html: this.props.content}}></p> 
+                        => <p> does not work
+                        => https://github.com/gatsbyjs/gatsby/issues/11108
+                        */}
+     
+                        <div 
+                            style={{
+                                textAlign: "left",
+                            }}
+                            dangerouslySetInnerHTML={{ __html: this.props.content }} />
+
                     </Col>
                 </Row>
                 <Row>
