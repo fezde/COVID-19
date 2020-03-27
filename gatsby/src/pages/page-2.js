@@ -1,6 +1,6 @@
 import React from "react"
-import { Link } from "gatsby"
-import { Row, Col, Container, Jumbotron } from "react-bootstrap"
+// import { Link } from "gatsby"
+import { Row, Col } from "react-bootstrap"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
