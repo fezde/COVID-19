@@ -1,37 +1,70 @@
 import React, { Component } from "react"
 import { StaticQuery, graphql } from "gatsby"
-import {Row, Col, Image} from "react-bootstrap"
+import {Row, Col, Image } from "react-bootstrap"
 
 
 class Post extends Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            showOverlay: false, 
+        };
     }
 
     render_data = (data) => {
+        const image_small = data.allFile.edges.find(
+            edge => edge.node.name === this.props.image+"_small"
+        );
         const image = data.allFile.edges.find(
             edge => edge.node.name === this.props.image
-        )
+        );
         console.log(data);
         console.log(image);
         return(
-            
-            <Row>
-                <Col sm={8}>
-                    <Image src={image.node.publicURL} fluid />
-                </Col>
-                <Col sm={4}>
-                    <h3>{this.props.title}</h3>
-                    <div dangerouslySetInnerHTML={{__html: this.props.content}}></div>
-                </Col>
-            </Row>
+            <React.Fragment>
+                <Row>
+                    <div style={{
+                        background: "#000000af",
+                        position: "absolute",
+                        width: "100vw",
+                        height: "100vh",
+                        top: 0,
+                        left: 0,
+                        zIndex: 1000,
+                        display: this.state.showOverlay ? "block": "none"  
+                    }}
+                    onClick={(event) => { this.setState({showOverlay: !this.state.showOverlay }); }}
+                    >
+                        <Image src={image.node.publicURL} fluid  />
+                    </div>
+                    <Col sm={8}>
+                        <a 
+                        style={{fontSize: "0.8em"}}
+                        onClick={(event) => { this.setState({showOverlay: !this.state.showOverlay }); }}
+                        href="#"
+                        >
+                            <Image src={image_small.node.publicURL} fluid  /><br/>
+                        
+                            (Click to enlarge)
+                        </a>
+                    </Col>
+                    <Col sm={4}>
+                        <h3>{this.props.title}</h3>
+                        <p align="left" dangerouslySetInnerHTML={{__html: this.props.content}}></p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col style={{minHeight: "40px"}}>&nbsp;</Col>
+                </Row>
+            </React.Fragment>
         );
     };
 
     render() {
         return (
-            <StaticQuery
+            <React.Fragment>
+                
+                <StaticQuery
                 query={graphql`
                 query SiteTitleQueryFEZ {
                     allFile(filter: {ext: {eq: ".png"}, sourceInstanceName: {eq: "charts"}}) {
@@ -46,6 +79,8 @@ class Post extends Component {
                 `}
                 render={(data) => this.render_data(data)}
             />
+            </React.Fragment>
+            
 
         );
     }
