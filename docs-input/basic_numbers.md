@@ -7,5 +7,5 @@ This chart aims at better understanding what the current infections mean for a c
 
 **A little example:**
 
-* 80.000 infected inhabitants in China represent about **0.006%** of the population while the sames
+* 80.000 infected inhabitants in China represent about **0.006%** of the population while the same
 * 80.000 infected inhabitants in Switzerland represent about **0.933%** of their population.
