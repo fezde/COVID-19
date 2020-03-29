@@ -19,30 +19,13 @@ logging.getLogger('matplotlib.colorbar').setLevel(logging.INFO)
 
 logging.debug("matplotlibrc is used from '%s'" % (matplotlib.matplotlib_fname()))
 
-def save_chart(fig, name):
-    extension = "png"
-    basePath = "charts/%s" % name
-    webPath = "charts/_current"
-
-    if not path.isdir(basePath):
-        logging.info("Creating path for chart: %s" % basePath)
-        mkdir(basePath)
-    if not path.isdir(webPath):
-        logging.info("Creating path for chart: %s" % webPath)
-        mkdir(webPath)
+def save_tmp_chart(fig, fileName):
     
-    fileName = "%s/%s-%s.%s" % (basePath, name, datetime.now().strftime("%Y%m%d-%H%M%S"), extension)
-    
-    webName = "%s/%s.%s" % (webPath, name, extension)
-    fileNameSmall = "%s/%s_small.%s" % (webPath, name, extension)
-    logging.debug("Saving chart to: '%s' and '%s" % (fileName, webName))
-
     fig.savefig(
         fileName, 
         bbox_inches='tight'
     )
 
-    
     fnt = ImageFont.truetype('/Library/Fonts/Arial Unicode.ttf', 15)
     
     img_orig = Image.open(fileName)
@@ -63,10 +46,44 @@ def save_chart(fig, name):
     text_width, text_height = d.textsize(copyright_text, font=fnt)
     d.text((img_orig.width - (text_width + 5), img_orig.height + 26), copyright_text, font=fnt, fill=(0, 0, 0))
 
-    
     img_new.save(fileName, pnginfo=metadata)
+
+    return (img_new, metadata)
+
+def save_chart_doc(fig, filename):
+    extension = "png"
+    basePath = "docs-input/%s.%s" % (filename, extension)
+
+    tempName = "temp." + extension
+    save_tmp_chart(fig, tempName)
+    copyfile(tempName, basePath)
+
+
+def save_chart(fig, name):
+    extension = "png"
+    basePath = "charts/%s" % name
+    webPath = "charts/_current"
+
+    if not path.isdir(basePath):
+        logging.info("Creating path for chart: %s" % basePath)
+        mkdir(basePath)
+    if not path.isdir(webPath):
+        logging.info("Creating path for chart: %s" % webPath)
+        mkdir(webPath)
+    
+    fileName = "%s/%s-%s.%s" % (basePath, name, datetime.now().strftime("%Y%m%d-%H%M%S"), extension)
+    
+    webName = "%s/%s.%s" % (webPath, name, extension)
+    fileNameSmall = "%s/%s_small.%s" % (webPath, name, extension)
+    logging.debug("Saving chart to: '%s' and '%s" % (fileName, webName))
+
+    tempName = "temp." + extension
+    (img_new, metadata) = save_tmp_chart(fig, tempName)
+
+    
 
     img_small = img_new.resize((math.floor(img_new.width * 0.4), math.floor(img_new.height * 0.4)), Image.ANTIALIAS)
     img_small.save(fileNameSmall, pnginfo=metadata)
 
-    copyfile(fileName, webName)
+    copyfile(tempName, fileName)
+    copyfile(tempName, webName)
