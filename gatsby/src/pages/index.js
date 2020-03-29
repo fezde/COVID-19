@@ -52,7 +52,9 @@ export const query = graphql`
           title
         }
       }
-      allMarkdownRemark(sort: { fields: [frontmatter___sorter], order: ASC }) {
+      allMarkdownRemark(
+        filter: {frontmatter: {type: {eq: "post"}}},
+        sort: { fields: [frontmatter___sorter], order: ASC }) {
         edges {
           node {
             html

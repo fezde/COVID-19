@@ -1,6 +1,7 @@
 ---
 title: "Recovery and Mortality Rates"
 sorter: 20
+type: post
 ---
 
 
