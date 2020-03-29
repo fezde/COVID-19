@@ -5,6 +5,7 @@ git pull --no-edit upstream master
 
 python3 basic_numbers.py
 python3 rates.py
+python3 offsets.py
 
 cd gatsby
 gatsby clean
