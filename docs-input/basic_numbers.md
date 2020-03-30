@@ -2,6 +2,7 @@
 title: "Basic Numbers"
 sorter: 10
 type: post
+anchor: basicNumbers
 ---
 
 This chart aims at better understanding what the current infections mean for a certain country. While news reports (or other analyses) usually report the total number of infections per country, that does not really reflect the severness of such an infection. 80.000 infected people means something completely different for a country like China than for a country like Switzerland.
