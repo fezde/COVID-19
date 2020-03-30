@@ -20,9 +20,46 @@ class Post extends Component {
         );
         console.log(data);
         console.log(image);
+
+        const img = <Col sm={12} lg={8}>
+            <a 
+            name={this.props.anchor}
+            style={{fontSize: "0.8em"}}
+            onClick={(event) => { this.setState({showOverlay: !this.state.showOverlay }); }}
+            href="#"
+            >
+                <Image src={image_small.node.publicURL} 
+                    fluid  
+                /><br/>
+            
+                (Click to enlarge)
+            </a>
+        </Col>;
+
+        let order = "order-sm-last";
+        if(this.props.align === "left"){
+            order = "order-sm-last order-lg-first";
+        }
+
+        const text = <Col sm={12} lg={4} className={order}>
+            <h3 className="d-none d-lg-block">
+            {this.props.title}
+             - {this.props.align}
+            </h3>
+
+            <div 
+                style={{
+                    textAlign: "left",
+                }}
+                dangerouslySetInnerHTML={{ __html: this.props.content }} />
+
+        </Col>;
+
+    
+
         return(
             <React.Fragment>
-                <Row id={this.props.anchor}>
+                <Row id={this.props.anchor} className="shadow-sm">
                     <div style={{
                         background: "#000000af",
                         position: "fixed",
@@ -46,33 +83,11 @@ class Post extends Component {
                             }}
                             />
                     </div>
-                    <Col sm={8}>
-                        <a 
-                        style={{fontSize: "0.8em"}}
-                        onClick={(event) => { this.setState({showOverlay: !this.state.showOverlay }); }}
-                        href="#"
-                        >
-                            <Image src={image_small.node.publicURL} 
-                                fluid  
-                            /><br/>
-                        
-                            (Click to enlarge)
-                        </a>
-                    </Col>
-                    <Col sm={4}>
+                    <Col sm={12} className="d-block d-lg-none">
                         <h3>{this.props.title}</h3>
-                        {/* <p dangerouslySetInnerHTML={{__html: this.props.content}}></p> 
-                        => <p> does not work
-                        => https://github.com/gatsbyjs/gatsby/issues/11108
-                        */}
-     
-                        <div 
-                            style={{
-                                textAlign: "left",
-                            }}
-                            dangerouslySetInnerHTML={{ __html: this.props.content }} />
-
                     </Col>
+                    {img}{text}
+                    
                 </Row>
                 <Row>
                     <Col style={{minHeight: "40px"}}>&nbsp;</Col>

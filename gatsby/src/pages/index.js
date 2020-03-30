@@ -6,7 +6,9 @@ import Post from "../components/Post"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const IndexPage = ({ data }) => (
+const IndexPage = ({ data }) => {
+  let count = 0;
+  return (
   <Layout pageInfo={{ pageName: "index" }}>
     <SEO title="Home" keywords={[`gatsby`, `react`, `bootstrap`]} />
     <Container className="text-center">
@@ -23,10 +25,13 @@ const IndexPage = ({ data }) => (
           </Jumbotron>
         </Col>
       </Row>
-      {data.allMarkdownRemark.edges.map(({ node }, index) => {
+      {
+        
+      data.allMarkdownRemark.edges.map(({ node }, index) => {
         const parts = node.fileAbsolutePath.split("/");
         const fileName = parts[parts.length - 1];
         console.log(fileName.split(".")[0]);
+        
         return (
 
 
@@ -35,14 +40,17 @@ const IndexPage = ({ data }) => (
             image={fileName.split(".")[0]}
             title={node.frontmatter.title}
             anchor={node.frontmatter.anchor}
-            content={node.html} />
+            content={node.html} 
+            align={ (++count%2 == 0) ? "left" : "right" }
+            />
         );
+        
       }
       )
       }
     </Container>
-  </Layout>
-)
+  </Layout>);
+}
 
 export default IndexPage
 
