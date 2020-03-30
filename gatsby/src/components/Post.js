@@ -22,7 +22,7 @@ class Post extends Component {
         console.log(image);
         return(
             <React.Fragment>
-                <Row>
+                <Row id={this.props.anchor}>
                     <div style={{
                         background: "#000000af",
                         position: "fixed",
