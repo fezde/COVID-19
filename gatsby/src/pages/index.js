@@ -41,7 +41,7 @@ const IndexPage = ({ data }) => {
             title={node.frontmatter.title}
             anchor={node.frontmatter.anchor}
             content={node.html} 
-            align={ (++count%2 == 0) ? "left" : "right" }
+            align={ (++count%2 === 0) ? "left" : "right" }
             />
         );
         

@@ -27,10 +27,13 @@ const Layout = ({ children, pageInfo }) => (
     render={data => (
       <>
         <Container fluid className="px-0 main">
-          <Row noGutters className="justify-content-center">
+          <Row noGutters className="justify-content-center" style={{
+            backgroundImage: "url(/cdc-w9KEokhajKw-unsplash.jpg)",
+            backgroundColor: "red",
+          }}>
             <Col className="justify-content-center">
               <center>
-                <Header siteTitle={data.site.siteMetadata.title} />
+                <Header siteTitle={data.site.siteMetadata.title}/>
               </center>
             </Col>
           </Row>

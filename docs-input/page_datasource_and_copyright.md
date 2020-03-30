@@ -9,7 +9,13 @@ sorter: 100
 All charts on this page a generated on the basis of data provided by the data repository for the 2019 Novel Coronavirus Visual Dashboard operated by the Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE). Also, Supported by ESRI Living Atlas Team and the Johns Hopkins University Applied Physics Lab (JHU APL).
 This data is provided here: [https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19)
 
-### Copyright Johns Hopkins Universit
+## Credits
+
+Header Image: Photo by [CDC](https://unsplash.com/@cdc) on [Unsplash](https://unsplash.com/s/photos/virus)
+
+## Copyrights
+
+### Copyright Johns Hopkins University
 
 The Johns Hopkins University states on their [https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19):
 
