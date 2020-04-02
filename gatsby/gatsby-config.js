@@ -2,7 +2,7 @@ module.exports = {
     pathPrefix: "/COVID-19",
     siteMetadata: {
         title: `Visualizing COVID-19 Data`,
-        description: `A page amaing to visualize the time aspects of the COVID-19 pandemy.`,
+        description: `A page aiming to visualize the time aspects of the COVID-19 pandemy.`,
         author: `Felix Kratzer (@fez_de)`,
     },
     plugins: [
