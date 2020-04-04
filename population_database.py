@@ -13,6 +13,7 @@ population = {
 
     "Denmark": 5.603 * 1000000,
 
+    "Ecuador": 16.62 * 1000000,
     "Egypt": 97.55 * 1000000,
 
     "France": 66.99 * 1000000,
@@ -30,10 +31,12 @@ population = {
     "Korea, South": 51.47 * 1000000,
 
     "Malaysia": 31.62 * 1000000,
+    "Mexico": 129.2 * 1000000,
 
     "Netherlands": 17.18 * 1000000,
     "Norway": 5.368 * 1000000, 
 
+    "Peru": 32.17 * 1000000,
     "Philippines": 104.9 * 1000000,
     "Portugal": 10.29 * 1000000,
 
