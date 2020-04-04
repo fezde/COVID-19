@@ -32,9 +32,9 @@ def get_timeline(subj):
 
 idx = 1
 fig, axes = plt.subplots(
-        nrows=3, 
+        nrows=2, 
         ncols=3,
-        figsize=(25,15) 
+        figsize=(25,10) 
     )
 fig.suptitle("Recovery and Mortality Rates", fontsize=16)
 
@@ -50,6 +50,11 @@ chart_titles = {
         "Recovered": "Case Survival Rate (CSR)"
     }
 }
+chart_max = {
+        "Confirmed": 100, 
+        "Deaths": 25, 
+        "Recovered": 100
+    }
 
 df_confirmed = get_timeline("Confirmed")
 topTen = df_confirmed.max().sort_values(ascending=False).head(10).index.tolist()
@@ -67,8 +72,6 @@ titles = {
 
 
 axes[1,0].axis('off')
-axes[2,0].axis('off')
-axes[2,2].axis('off')
 
 for subj in ["Deaths", "Recovered"]:
     logging.debug("Analysing %s" % subj)
@@ -90,14 +93,7 @@ for subj in ["Deaths", "Recovered"]:
         title=chart_titles["rate"][subj], 
         lw=3)
     ax2.yaxis.set_major_formatter(mtick.PercentFormatter())
-
-    if subj == "Deaths":
-        ax3 = df_chart_total.plot(
-            ax=axes[2, idx],
-            title=chart_titles["rate"][subj] + " (zoomed)", 
-            lw=3)
-        ax3.yaxis.set_major_formatter(mtick.PercentFormatter())
-        ax3.set_ylim(0, 25)
+    ax2.set_ylim(0, chart_max[subj])
 
     df_base_filtered.plot(
         ax=axes[0, idx],
