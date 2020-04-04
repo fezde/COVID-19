@@ -76,6 +76,7 @@ class Post extends Component {
                             fluid  
                             style = {{
                                 maxWidth: "90vw",
+                                maxHeight: "95vh",
                                 position: "absolute",
                                 left: "50vw",
                                 top: "50vh",
