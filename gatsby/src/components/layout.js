@@ -28,7 +28,7 @@ const Layout = ({ children, pageInfo }) => (
       <>
         <Container fluid className="px-0 main">
           <Row noGutters className="justify-content-center" style={{
-            backgroundImage: "url(cdc-w9KEokhajKw-unsplash.jpg)",
+            backgroundImage: "url(./cdc-w9KEokhajKw-unsplash.jpg)",
             backgroundColor: "red",
           }}>
             <Col className="justify-content-center">
