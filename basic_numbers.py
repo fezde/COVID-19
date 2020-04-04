@@ -21,6 +21,18 @@ filenames = {
     "Deaths": "time_series_covid19_deaths_global.csv", 
     "Recovered": "time_series_covid19_recovered_global.csv"
 }
+chart_titles = {
+    "totals": {
+        "Confirmed": "Confirmed (C)", 
+        "Deaths": "Deaths (D)", 
+        "Recovered": "Recovered (R)"
+    },
+    "rate": {
+        "Confirmed": "Infection Rate (IR)", 
+        "Deaths": "Mortality Rate (MR)", 
+        "Recovered": "Recovery Rate (RR)"
+    }
+}
 
 for subj in ["Confirmed", "Deaths", "Recovered"]:
     logging.debug("Analysing %s" % subj)
@@ -49,7 +61,7 @@ for subj in ["Confirmed", "Deaths", "Recovered"]:
 
     df_chart_total.plot(
         ax=axes[0,idx],
-        title="%s Total" % subj, 
+        title=chart_titles["totals"][subj], 
         lw=3)
 
 
@@ -79,7 +91,7 @@ for subj in ["Confirmed", "Deaths", "Recovered"]:
     
     ax2 = df_chart_relative.plot(
         ax=axes[1,idx],
-        title="%s in %% of population" % subj, 
+        title=chart_titles["rate"][subj], 
         lw=3)
     ax2.yaxis.set_major_formatter(mtick.PercentFormatter())
 

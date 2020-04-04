@@ -38,19 +38,33 @@ fig, axes = plt.subplots(
     )
 fig.suptitle("Recovery and Mortality Rates", fontsize=16)
 
+chart_titles = {
+    "totals": {
+        "Confirmed": "Confirmed (C)", 
+        "Deaths": "Deaths (D)", 
+        "Recovered": "Recovered (R)"
+    },
+    "rate": {
+        "Confirmed": "", 
+        "Deaths": "Case Fatality Rate (CFR)", 
+        "Recovered": "Case Survival Rate (CSR)"
+    }
+}
 
 df_confirmed = get_timeline("Confirmed")
 topTen = df_confirmed.max().sort_values(ascending=False).head(10).index.tolist()
 df_confirmed_filtered = df_confirmed.filter(items=topTen)
 df_confirmed_filtered.plot(
         ax=axes[0, 0],
-        title="Confirmed Total", 
+        title=chart_titles["totals"]["Confirmed"], 
         lw=3)
 
 titles = {
     "Recovered": "Recovery Rate",
     "Deaths": "Mortality Rate"
 }
+
+
 
 axes[1,0].axis('off')
 axes[2,0].axis('off')
@@ -73,21 +87,21 @@ for subj in ["Deaths", "Recovered"]:
 
     ax2 = df_chart_total.plot(
         ax=axes[1, idx],
-        title=titles[subj], 
+        title=chart_titles["rate"][subj], 
         lw=3)
     ax2.yaxis.set_major_formatter(mtick.PercentFormatter())
 
     if subj == "Deaths":
         ax3 = df_chart_total.plot(
             ax=axes[2, idx],
-            title=titles[subj] + " (zoomed)", 
+            title=chart_titles["rate"][subj] + " (zoomed)", 
             lw=3)
         ax3.yaxis.set_major_formatter(mtick.PercentFormatter())
         ax3.set_ylim(0, 25)
 
     df_base_filtered.plot(
         ax=axes[0, idx],
-        title="%s Total" % subj, 
+        title=chart_titles["totals"][subj], 
         lw=3)
 
     idx += 1

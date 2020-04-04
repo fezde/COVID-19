@@ -1,5 +1,5 @@
 ---
-title: "Recovery and Mortality Rates"
+title: "Case Survival and Case Fatality Rate"
 sorter: 20
 type: post
 ---
@@ -7,8 +7,9 @@ type: post
 
 In its bottom line this chart shows two different rates:
 
-* **Mortality Rate:** Deaths / Confirmed
-* **Recovery Rate**: Recovered / Confirmed
+* **Case fatality rate**: `CFR := D/C`
+* **Case survival rate**: `CFR := R/C`
+* For details please see the [Definitions page](./page_definitions/)
   
 On the top row the absolute numbers are shown. Both rows show the countries with the highest total number in the given category.
 
