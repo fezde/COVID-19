@@ -44,7 +44,6 @@ class Post extends Component {
         const text = <Col sm={12} lg={4} className={order}>
             <h3 className="d-none d-lg-block">
             {this.props.title}
-             - {this.props.align}
             </h3>
 
             <div 
