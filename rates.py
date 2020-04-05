@@ -62,6 +62,7 @@ df_confirmed_filtered = df_confirmed.filter(items=topTen)
 df_confirmed_filtered.plot(
         ax=axes[0, 0],
         title=chart_titles["totals"]["Confirmed"], 
+        color = tools.get_chart_colors(df_confirmed_filtered),
         lw=3)
 
 titles = {
@@ -91,6 +92,7 @@ for subj in ["Deaths", "Recovered"]:
     ax2 = df_chart_total.plot(
         ax=axes[1, idx],
         title=chart_titles["rate"][subj], 
+        color = tools.get_chart_colors(df_chart_total),
         lw=3)
     ax2.yaxis.set_major_formatter(mtick.PercentFormatter())
     ax2.set_ylim(0, chart_max[subj])
@@ -98,6 +100,7 @@ for subj in ["Deaths", "Recovered"]:
     df_base_filtered.plot(
         ax=axes[0, idx],
         title=chart_titles["totals"][subj], 
+        color = tools.get_chart_colors(df_base_filtered),
         lw=3)
 
     idx += 1

@@ -7,6 +7,9 @@ from shutil import copyfile
 from PIL import Image, ImageDraw, ImageFont
 from PIL.PngImagePlugin import  PngInfo
 import math
+from population_database import population
+import colorsys
+import matplotlib.colors as mc
 
 
 FORMAT = '%(asctime)-15s [%(levelname)7s] - %(name)s - %(message)s'
@@ -87,3 +90,55 @@ def save_chart(fig, name):
 
     copyfile(tempName, fileName)
     copyfile(tempName, webName)
+
+# ####################################################################################
+# Color management
+# ####################################################################################
+def lighten_color(color, amount=0.5):
+    """
+    Lightens the given color by multiplying (1-luminosity) by the given amount.
+    Input can be matplotlib color string, hex string, or RGB tuple.
+
+    Examples:
+    >> lighten_color('g', 0.3)
+    >> lighten_color('#F034A3', 0.6)
+    >> lighten_color((.3,.55,.1), 0.5)
+
+    Source: https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib
+    """
+    
+    try:
+        c = mc.cnames[color]
+    except:
+        c = color
+    c = colorsys.rgb_to_hls(*mc.to_rgb(c))
+    r = colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
+    r = list(r)
+    
+    for i in range(3):
+        while r[i] < 0:
+            r[i] = 1 - r[i]
+        while r[i] > 1:
+            r[i] = r[i] -1
+    logging.debug(r)
+    return (r[0], r[1], r[2]) #colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
+
+def get_chart_colors(data_frame):
+    return [colorcycle[list(population.keys()).index(country)] for country in data_frame.columns]
+
+
+#colorcycle = ['#163028', '#244c44', '#326a63', '#408985', '#4eaaab', '#5cccd4', '#6deeff', '#4bcbf4', '#46a8e2', '#5483c7', '#635ea4', '#683878', '#610b49']
+colorcycle = ['#005e8a', '#4764a4', '#8364b0', '#bc5eaa', '#eb5a93', '#ff6470', '#ff8145', '#ffa600']
+orig_colorcycle = colorcycle.copy()
+
+count = 0
+step_size = 0.2
+while len(population) > len(colorcycle):
+    count += 1
+    for c in orig_colorcycle:
+        # c2 = lighten_color(c, 1.0-(count * step_size))
+        # colorcycle.append(c2)
+        c2 = lighten_color(c, 1.0+(count * step_size))
+        colorcycle.append(c2)
+# random.shuffle(colorcycle)
+logging.debug(colorcycle)
