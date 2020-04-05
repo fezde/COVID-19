@@ -3,14 +3,7 @@ import PropTypes from "prop-types"
 import React from "react"
 
 const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `#20232a`,
-      // background: "#fe2fe2",
-      backgroundImage: "url(/cdc-w9KEokhajKw-unsplash.jpg)",
-      backgroundSize:"100vw auto",
-      backgroundPosition: "center center",
-    }}
+  <header id="page-header"
   >
     <div
       style={{
