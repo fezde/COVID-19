@@ -10,6 +10,7 @@ import math
 from population_database import population
 import colorsys
 import matplotlib.colors as mc
+import pandas as pd
 
 
 FORMAT = '%(asctime)-15s [%(levelname)7s] - %(name)s - %(message)s'
@@ -92,6 +93,32 @@ def save_chart(fig, name):
     copyfile(tempName, webName)
 
 # ####################################################################################
+# Source Loading
+# ####################################################################################
+def get_timeline(subj):
+    filenames = {
+        "Confirmed": "time_series_covid19_confirmed_global.csv", 
+        "Deaths": "time_series_covid19_deaths_global.csv", 
+        "Recovered": "time_series_covid19_recovered_global.csv"
+    }
+
+    # Load data from CSV
+    df_base = pd.read_csv('csse_covid_19_data/csse_covid_19_time_series/' + filenames[subj])  
+    df_base.set_index(["Province/State", "Country/Region"])
+    df_base.drop(["Lat", "Long"], inplace=True, axis=1)
+
+    # Group by Country
+    df_base = df_base.groupby(['Country/Region']).sum()
+    
+    # Create a timeline
+    df_base = df_base.transpose()
+    
+    # Drop "countries" that we will not handle
+    # df_base.drop(["Cruise Ship"], inplace=True, axis=1)
+
+    return df_base
+
+# ####################################################################################
 # Color management
 # ####################################################################################
 def lighten_color(color, amount=0.5):
@@ -120,7 +147,6 @@ def lighten_color(color, amount=0.5):
             r[i] = 1 - r[i]
         while r[i] > 1:
             r[i] = r[i] -1
-    logging.debug(r)
     return (r[0], r[1], r[2]) #colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
 
 def get_chart_colors(data_frame):
@@ -135,10 +161,10 @@ count = 0
 step_size = 0.2
 while len(population) > len(colorcycle):
     count += 1
+    logging.debug("Enlarging color cycle")
     for c in orig_colorcycle:
         # c2 = lighten_color(c, 1.0-(count * step_size))
         # colorcycle.append(c2)
         c2 = lighten_color(c, 1.0+(count * step_size))
         colorcycle.append(c2)
 # random.shuffle(colorcycle)
-logging.debug(colorcycle)

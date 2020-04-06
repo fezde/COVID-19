@@ -10,31 +10,6 @@ from population_database import population
 
 
 
-def get_timeline(subj):
-    filenames = {
-        "Confirmed": "time_series_covid19_confirmed_global.csv", 
-        "Deaths": "time_series_covid19_deaths_global.csv", 
-        "Recovered": "time_series_covid19_recovered_global.csv"
-    }
-
-    # Load data from CSV
-    df_base = pd.read_csv('csse_covid_19_data/csse_covid_19_time_series/' + filenames[subj])  
-    df_base.set_index(["Province/State", "Country/Region"])
-    df_base.drop(["Lat", "Long"], inplace=True, axis=1)
-
-    # Group by Country
-    df_base = df_base.groupby(['Country/Region']).sum()
-    
-    # Create a timeline
-    df_base = df_base.transpose()
-    
-    # Drop "countries" that we will not handle
-    # df_base.drop(["Cruise Ship"], inplace=True, axis=1)
-
-    return df_base
-
-
-
 fig, axes = plt.subplots(
         nrows=2, 
         ncols=3,
@@ -64,7 +39,7 @@ idx = 0
 
 
 for subj in ["Confirmed", "Deaths"]:
-    df_base = get_timeline(subj) 
+    df_base = tools.get_timeline(subj) 
 
     
 
