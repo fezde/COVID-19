@@ -1,19 +1,19 @@
 import React, { Component } from "react"
 import { StaticQuery, graphql } from "gatsby"
-import {Row, Col, Image } from "react-bootstrap"
-
+import { Row, Col, Image } from "react-bootstrap"
+import { FaLink } from 'react-icons/fa';
 
 class Post extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showOverlay: false, 
+            showOverlay: false,
         };
     }
 
     render_data = (data) => {
         const image_small = data.allFile.edges.find(
-            edge => edge.node.name === this.props.image+"_small"
+            edge => edge.node.name === this.props.image + "_small"
         );
         const image = data.allFile.edges.find(
             edge => edge.node.name === this.props.image
@@ -22,31 +22,37 @@ class Post extends Component {
         console.log(image);
 
         const img = <Col sm={12} lg={8}>
-            <a 
-            name={this.props.anchor}
-            style={{fontSize: "0.8em"}}
-            onClick={(event) => { this.setState({showOverlay: !this.state.showOverlay }); }}
-            href="#"
+            <a
+                name={this.props.anchor}
+                style={{ fontSize: "0.8em" }}
+                onClick={(event) => { this.setState({ showOverlay: !this.state.showOverlay }); }}
+                href="#"
             >
-                <Image src={image_small.node.publicURL} 
-                    fluid  
-                /><br/>
-            
+                <Image src={image_small.node.publicURL}
+                    fluid
+                /><br />
+
                 (Click to enlarge)
             </a>
         </Col>;
 
         let order = "order-sm-last";
-        if(this.props.align === "left"){
+        if (this.props.align === "left") {
             order = "order-sm-last order-lg-first";
         }
 
         const text = <Col sm={12} lg={4} className={order}>
             <h3 className="d-none d-lg-block">
-            {this.props.title}
+                {this.props.title} &nbsp;
+            <a href={ "#" + this.props.anchor}>
+                <FaLink
+                    color="#cccccc"
+                    size="0.7em"
+                />
+            </a>
             </h3>
 
-            <div 
+            <div
                 style={{
                     textAlign: "left",
                 }}
@@ -54,9 +60,9 @@ class Post extends Component {
 
         </Col>;
 
-    
 
-        return(
+
+        return (
             <React.Fragment>
                 <Row id={this.props.anchor} className="shadow-sm">
                     <div style={{
@@ -67,13 +73,13 @@ class Post extends Component {
                         top: 0,
                         left: 0,
                         zIndex: 1000,
-                        display: this.state.showOverlay ? "block": "none"  
+                        display: this.state.showOverlay ? "block" : "none"
                     }}
-                    onClick={(event) => { this.setState({showOverlay: !this.state.showOverlay }); }}
+                        onClick={(event) => { this.setState({ showOverlay: !this.state.showOverlay }); }}
                     >
                         <Image src={image.node.publicURL}
-                            fluid  
-                            style = {{
+                            fluid
+                            style={{
                                 maxWidth: "90vw",
                                 maxHeight: "95vh",
                                 position: "absolute",
@@ -81,16 +87,16 @@ class Post extends Component {
                                 top: "50vh",
                                 transform: "translate(-50%, -50%)"
                             }}
-                            />
+                        />
                     </div>
                     <Col sm={12} className="d-block d-lg-none">
                         <h3>{this.props.title}</h3>
                     </Col>
                     {img}{text}
-                    
+
                 </Row>
                 <Row>
-                    <Col style={{minHeight: "40px"}}>&nbsp;</Col>
+                    <Col style={{ minHeight: "40px" }}>&nbsp;</Col>
                 </Row>
             </React.Fragment>
         );
@@ -99,9 +105,9 @@ class Post extends Component {
     render() {
         return (
             <React.Fragment>
-                
+
                 <StaticQuery
-                query={graphql`
+                    query={graphql`
                 query SiteTitleQueryFEZ {
                     allFile(filter: {ext: {eq: ".png"}, sourceInstanceName: {eq: "charts"}}) {
                         edges {
@@ -113,10 +119,10 @@ class Post extends Component {
                       }
                 }
                 `}
-                render={(data) => this.render_data(data)}
-            />
+                    render={(data) => this.render_data(data)}
+                />
             </React.Fragment>
-            
+
 
         );
     }
