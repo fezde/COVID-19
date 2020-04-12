@@ -42,6 +42,11 @@ gatsby clean
 npm run deploy
 cd ..
 
+DATE=`date "+%Y-%m-%d-%H"`
+TAG="data-update_$DATE"
+git tag "$TAG"
+git push --tags
+
 # Bring new charts to git
 git add charts/**/*.png
 git commit -m "Updated data"
