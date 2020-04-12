@@ -93,6 +93,7 @@ for subj in ["Confirmed", "Deaths", "Recovered"]:
     ax2 = df_chart_relative.plot(
         ax=axes[1,idx],
         title=chart_titles["rate"][subj], 
+        # style = tools.get_chart_styles(df_chart_relative),
         color = tools.get_chart_colors(df_chart_relative),
         lw=3)
     ax2.yaxis.set_major_formatter(mtick.PercentFormatter())
