@@ -4,8 +4,6 @@ name: Update page on tags (excluding data-update)
 
 on:
   push:
-    branches: 
-      - "master"
     tags:
         - "*"               # Run on every tag
 
