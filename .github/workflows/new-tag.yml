@@ -13,7 +13,6 @@ jobs:
     # Do a second step
     instead_of_tweet:
         runs-on: ubuntu-latest
-        needs: gatsby
         steps:
             - uses: actions/checkout@v2
 
