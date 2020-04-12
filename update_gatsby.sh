@@ -1,5 +1,5 @@
 # Create page
 cd gatsby
-gatsby clean
+#gatsby clean
 npm run deploy
 cd ..
