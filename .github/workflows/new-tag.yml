@@ -3,23 +3,13 @@
 name: Update page on tags (excluding data-update)
 
 on:
-    push:
-        branches: [master]
-        tags:
-            - "*"               # Run on every tag
-            - "!data-update_*"  # ignore all "data-update_yyyy-mm-dd-hh" tags
+  push:
+    branches: 
+      - "master"
+    tags:
+        - "*"               # Run on every tag
 
 jobs:
-    # First build the new gatsby page and deploy it to gh-pages branche
-    gatsby:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-
-            - name: Update Gatsby
-              run: |
-                chmod +x update_gatsby.sh
-                ./update_gatsby.sh
     # Do a second step
     instead_of_tweet:
         runs-on: ubuntu-latest
