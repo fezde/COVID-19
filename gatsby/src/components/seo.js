@@ -11,7 +11,7 @@ import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 function SEO({ description, lang, meta, keywords, title }) {
-  const { site } = useStaticQuery(
+  const { site, allFile } = useStaticQuery(
     graphql`
       query {
         site {
@@ -19,6 +19,13 @@ function SEO({ description, lang, meta, keywords, title }) {
             title
             description
             author
+          }
+        }
+        allFile(filter: {absolutePath: {regex: "/.*_current\/opengraph_image.png/i"}}) {
+          nodes {
+            absolutePath
+            publicURL
+            name
           }
         }
       }
@@ -58,6 +65,10 @@ function SEO({ description, lang, meta, keywords, title }) {
         {
           name: `twitter:creator`,
           content: site.siteMetadata.author,
+        },
+        {
+          name: `og:image`,
+          content: allFile.nodes[0].publicURL,
         },
         {
           name: `twitter:title`,

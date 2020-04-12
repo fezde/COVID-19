@@ -32,6 +32,7 @@ python3 rates.py
 python3 offsets.py
 python3 daily_changes.py
 python3 ill.py
+python3 opengraph_image.py
 
 # Create page
 cd gatsby
