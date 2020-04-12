@@ -15,10 +15,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
+
             - name: Update Gatsby
-            run: |
-              chmod +x .update_gatsby.sh
-              ./update_gatsby.sh
+              run: |
+                chmod +x .update_gatsby.sh
+                ./update_gatsby.sh
     # Do a second step
     instead_of_tweet:
         runs-on: ubuntu-latest
