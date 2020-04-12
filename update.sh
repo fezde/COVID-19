@@ -34,11 +34,7 @@ python3 daily_changes.py
 python3 ill.py
 python3 opengraph_image.py
 
-# Create page
-cd gatsby
-gatsby clean
-npm run deploy
-cd ..
+./update_gatsby.sh
 
 # Bring new charts to git
 git add charts/**/*.png
