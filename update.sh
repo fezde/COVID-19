@@ -20,8 +20,10 @@ git add README.md
 # Get checksums after the git pull
 MD_AFTER=$(md5s)
 if [ "$MD_BEFORE" == "$MD_AFTER" ]; then
-    echo "Files have not chaged. Nothing to do here"
-    exit 0
+    if [ "$1" != "--force" ]; then
+        echo "Files have not chaged. Nothing to do here"
+        exit 0
+    fi
 fi
 
 
@@ -34,7 +36,11 @@ python3 daily_changes.py
 python3 ill.py
 python3 opengraph_image.py
 
-./update_gatsby.sh
+# Create page
+cd gatsby
+gatsby clean
+npm run deploy
+cd ..
 
 # Bring new charts to git
 git add charts/**/*.png
