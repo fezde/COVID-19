@@ -15,6 +15,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
+            - name: cd in right directory
+              run: cd gatsby
             - uses: enriikke/gatsby-gh-pages-action@v2
               with:
                   access-token: ${{ secrets.ACCESS_TOKEN }}
