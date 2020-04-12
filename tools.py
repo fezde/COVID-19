@@ -1,8 +1,8 @@
 import logging
 import sys
-from os import path, mkdir
+from os import path, mkdir, getenv
 from datetime import datetime
-import matplotlib
+import matplotlib as plt
 from shutil import copyfile
 from PIL import Image, ImageDraw, ImageFont
 from PIL.PngImagePlugin import  PngInfo
@@ -16,12 +16,13 @@ import pandas as pd
 FORMAT = '%(asctime)-15s [%(levelname)7s] - %(name)s - %(message)s'
 logging.basicConfig(stream=sys.stdout, format=FORMAT)
 
-logging.getLogger().setLevel(logging.DEBUG)
+DEBUG_LEVEL = getenv('DEBUG_LEVEL') if getenv('DEBUG_LEVEL') else "DEBUG"
+logging.getLogger().setLevel(DEBUG_LEVEL)
 logging.getLogger('matplotlib.font_manager').setLevel(logging.INFO)
 logging.getLogger('matplotlib.ticker').setLevel(logging.INFO)
 logging.getLogger('matplotlib.colorbar').setLevel(logging.INFO)
 
-logging.debug("matplotlibrc is used from '%s'" % (matplotlib.matplotlib_fname()))
+logging.debug("matplotlibrc is used from '%s'" % (plt.matplotlib_fname()))
 
 def save_tmp_chart(fig, fileName):
     
@@ -149,13 +150,27 @@ def lighten_color(color, amount=0.5):
             r[i] = r[i] -1
     return (r[0], r[1], r[2]) #colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
 
+
+
 def get_chart_colors(data_frame):
     return [colorcycle[list(population.keys()).index(country)] for country in data_frame.columns]
 
+def get_chart_styles(data_frame):
+    return [stylecycle[list(population.keys()).index(country)] for country in data_frame.columns]
+
 
 #colorcycle = ['#163028', '#244c44', '#326a63', '#408985', '#4eaaab', '#5cccd4', '#6deeff', '#4bcbf4', '#46a8e2', '#5483c7', '#635ea4', '#683878', '#610b49']
-colorcycle = ['#005e8a', '#4764a4', '#8364b0', '#bc5eaa', '#eb5a93', '#ff6470', '#ff8145', '#ffa600']
+colorcycle = ['#005e8aff', '#4764a4ff', '#8364b0ff', '#bc5eaaff', '#eb5a93ff', '#ff6470ff', '#ff8145ff', '#ffa600ff']
+# colorcycle = plt.rcParams['axes.prop_cycle'].by_key()['color']
 orig_colorcycle = colorcycle.copy()
+logging.debug("Color cycle: %s" % colorcycle)
+
+basestyles = ["#fe2fe2x-", "b.-", "bo-", "b1-", "b|-", "b2-"]
+stylecycle = []
+for i in range(len(basestyles)):
+    for _ in range(len(colorcycle)):
+        stylecycle.append(basestyles[i])
+logging.debug("Style cycle: %s" % stylecycle)
 
 count = 0
 step_size = 0.2
@@ -167,4 +182,12 @@ while len(population) > len(colorcycle):
         # colorcycle.append(c2)
         c2 = lighten_color(c, 1.0+(count * step_size))
         colorcycle.append(c2)
+        # colorcycle.append(c)
 # random.shuffle(colorcycle)
+
+tmpcc = colorcycle.copy()
+colorcycle = []
+for c in tmpcc:
+    newc = plt.colors.to_rgba(c)
+    logging.debug("%s -> %s" % (c,newc))
+    colorcycle.append(newc)
