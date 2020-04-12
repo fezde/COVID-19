@@ -7,7 +7,7 @@ on:
     branches: 
       - "master"
     tags:
-        - "*.*"               # Run on every tag
+        - "*"               # Run on every tag
 
 jobs:
     # Do a second step
