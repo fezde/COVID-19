@@ -14,14 +14,11 @@ jobs:
     gatsby:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v1
-            - name: cd in right directory
-              run: cd gatsby
-            - uses: enriikke/gatsby-gh-pages-action@v2
-              with:
-                  access-token: ${{ secrets.ACCESS_TOKEN }}
-                  deploy-branch: gh-pages
-                  gatsby-args: --prefix-paths
+            - uses: actions/checkout@v2
+            - name: Update Gatsby
+            run: |
+              chmod +x .update_gatsby.sh
+              ./update_gatsby.sh
     # Do a second step
     instead_of_tweet:
         runs-on: ubuntu-latest
