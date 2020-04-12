@@ -15,8 +15,7 @@ MD_BEFORE=$(md5s)
 # https://github.com/CSSEGISandData/COVID-19
 git pull --no-edit upstream master
 git merge --strategy-option ours -F README.md
-
-exit
+git add README.md
 
 # Get checksums after the git pull
 MD_AFTER=$(md5s)
