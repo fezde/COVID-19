@@ -67,7 +67,7 @@ function SEO({ description, lang, meta, keywords, title }) {
           content: site.siteMetadata.author,
         },
         {
-          name: `og:image`,
+          property: `og:image`,
           content: allFile.nodes[0].publicURL,
         },
         {
