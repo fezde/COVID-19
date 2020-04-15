@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # Calc a md5 of the relevant data files 
 function md5s()
 {
@@ -36,6 +38,19 @@ python3 daily_changes.py
 python3 ill.py
 python3 opengraph_image.py
 
+python3 ip_map_animation.py
+MAPDIR="charts/ill_people_map"
+NOW=`date "+%Y%m%d-%H%M%S"`
+TMPFILE="$MAPDIR/ip_map-tmp.gif"
+MAPFILE="$MAPDIR/ip_map-$NOW.gif"
+CURRFILE="charts/_current/ip_map.gif"
+CURRFILE_SMALL="charts/_current/ip_map_small.gif"
+convert -delay 30 -loop 0 $MAPDIR/tmp/ip_map_2020-*.png "$TMPFILE"
+convert "$TMPFILE"  \( -clone -1 -set delay 500 \) "$MAPFILE"
+rm "$TMPFILE"
+cp "$MAPFILE" "$CURRFILE"
+convert "$CURRFILE" -scale 40% "$CURRFILE_SMALL"
+
 # Create page
 cd gatsby
 gatsby clean
@@ -49,5 +64,6 @@ git push --tags
 
 # Bring new charts to git
 git add charts/**/*.png
+git add charts/**/*.gif
 git commit -m "Updated data"
 git push
