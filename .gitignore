@@ -3,3 +3,4 @@
 .vscode/settings.json
 *.pyc
 temp.png
+charts/ill_people_map/tmp/*
