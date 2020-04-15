@@ -64,7 +64,16 @@ class Post extends Component {
 
         return (
             <React.Fragment>
-                <Row id={this.props.anchor} className="shadow-sm">
+                <Row className="shadow-sm">
+                    <div
+                    id={this.props.anchor}
+                    style={{
+                        maxWidth: "0px",
+                        maxHeight: "0px",
+                        position: "relative",
+                        top: "-70px",
+                    }}>
+                    </div>
                     <div style={{
                         background: "#000000af",
                         position: "fixed",
