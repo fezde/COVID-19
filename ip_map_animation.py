@@ -105,14 +105,7 @@ for col in df_ill.columns:
         color = (0.117, 0.449, 0.703, 0.5),
     )
     ax2.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
- 
- 
-
-    
-   
-
-    
-
+    fig.tight_layout()
 
     tools.save_tmp_chart(fig, file_name)
 
