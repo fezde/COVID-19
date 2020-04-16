@@ -21,6 +21,8 @@ logging.getLogger().setLevel(DEBUG_LEVEL)
 logging.getLogger('matplotlib.font_manager').setLevel(logging.INFO)
 logging.getLogger('matplotlib.ticker').setLevel(logging.INFO)
 logging.getLogger('matplotlib.colorbar').setLevel(logging.INFO)
+logging.getLogger('numba.byteflow').setLevel(logging.INFO)
+logging.getLogger('numba.interpreter').setLevel(logging.INFO)
 
 logging.debug("matplotlibrc is used from '%s'" % (plt.matplotlib_fname()))
 
