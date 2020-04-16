@@ -58,8 +58,6 @@ df_ill = df_confirmed - df_deaths - df_recovered
 df_ill_relative = calculate_rate(df_confirmed - df_deaths - df_recovered)
 
 
-
-logging.info("Creating image for og:image from ill.py")
 fig2, axes2 = plt.subplots(
     nrows=1,
     ncols=1,
