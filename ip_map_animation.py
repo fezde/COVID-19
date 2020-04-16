@@ -5,6 +5,7 @@ import geopandas as gpd
 import tools
 import logging
 import mapclassify as mc
+from datetime import datetime
 
 def rename_country(df, country_from, country_to):
     tmp = df[df["NAME_EN"] == country_from]
@@ -39,12 +40,16 @@ df_recovered = tools.get_timeline("Recovered")
 df_ill = df_confirmed - df_deaths - df_recovered
 
 df_ill = df_ill.transpose()
-logging.debug("\n%s" % df_ill)
+
 
 
 merged = gdf.merge(df_ill, left_on='NAME_EN', right_on='Country/Region')
 
+total_per_day = {}
+
 for col in df_ill.columns:
+    total_per_day[col] = merged[col].sum()
+
     parts = col.split("/")
     m = "0"+parts[0] if len(parts[0]) == 1 else parts[0]
     d = "0"+parts[1] if len(parts[1]) == 1 else parts[1]
@@ -56,21 +61,21 @@ for col in df_ill.columns:
 
     col_data_above_zero = merged[merged[col]>0]
     num_records = len(col_data_above_zero[col])
-    # col_data_above_zero = col_data[col_data]
-    # logging.debug("\n%s"%col_data_above_zero)
-    # logging.debug(col_data_above_zero[col])
-    # logging.debug(num_records)
-    
-    # logging.debug("\n%s" % mc.FisherJenks(col_data_above_zero, k=colors))
+
     if num_records < colors * 2:
         logging.debug("Skipping %s as it only has %d records instead of %d" % (col, num_records, colors))
         continue
 
-    fig, axes = plt.subplots(
-        nrows=1,
-        ncols=1,
-        figsize=(16, 9)
+    fig = plt.figure(figsize=(16, 9))
+    axes = fig.add_subplot(111)
+    axes2 = fig.add_subplot(
+        111,  
+        autoscale_on = True,
+        alpha = 0.5,
+        facecolor="None",
     )
+
+    
 
     ax = merged.dropna().plot(
         column=col,
@@ -83,21 +88,31 @@ for col in df_ill.columns:
         k=colors,
         legend=True,
         lw=1,
-        )
+    )
 
     merged[merged.isna().any(axis=1)].plot(ax=ax, color='#fafafa', hatch='///')
-
-    ax.set_title(
-        "Ill people (IP) as of %s" % col,
-        # fontdict={'fontsize': 20}, 
-        # loc='left'
-    )
-    # ax.annotate(description, xy=(0.1, 0.1), size=12, xycoords='figure fraction')
-
     ax.set_axis_off()
     ax.set_xlim([-1.5e7, 1.7e7])
-    # ax.get_legend().set_bbox_to_anchor((.12, .4))
-    ax.get_figure()
+    title_date = datetime.strptime(col, "%m/%d/%y").strftime("%d %b %Y")
+    ax.set_title("Ill people (IP) as of %s" % title_date)
+
+    df_total = pd.DataFrame.from_dict(total_per_day, orient='index')
+    logging.debug("\n%s" % df_total)
+    ax2 = df_total.plot(
+        ax=axes2,
+        legend=False,
+        lw=3,
+        color = (0.117, 0.449, 0.703, 0.5),
+    )
+    ax2.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+ 
+ 
+
+    
+   
+
+    
+
 
     tools.save_tmp_chart(fig, file_name)
 
