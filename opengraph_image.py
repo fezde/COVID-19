@@ -47,6 +47,7 @@ def calculate_rate(df):
         df[col] *= 100
     return df
 
+logging.info("Running %s" % __file__)
 
 df_confirmed = tools.get_timeline("Confirmed")
 df_deaths = tools.get_timeline("Deaths")

@@ -14,7 +14,7 @@ def rename_country(df, country_from, country_to):
     df.at[index,"NAME_EN"] = country_to
     return df
 
-logging.debug("Running %s" % __file__)
+logging.info("Running %s" % __file__)
 
 shapefile = 'geo_data/ne_10m_admin_0_countries.shp'
 

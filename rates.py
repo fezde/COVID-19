@@ -30,6 +30,8 @@ def get_timeline(subj):
 
     return df_base
 
+logging.info("Running %s" % __file__)
+
 idx = 1
 fig, axes = plt.subplots(
         nrows=2, 

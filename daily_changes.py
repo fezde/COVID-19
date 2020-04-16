@@ -9,7 +9,7 @@ import matplotlib.ticker as mtick
 from population_database import population
 
 
-
+logging.info("Running %s" % __file__)
 fig, axes = plt.subplots(
         nrows=2, 
         ncols=3,

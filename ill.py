@@ -8,12 +8,7 @@ import random
 import matplotlib.ticker as mtick
 from population_database import population
 
-fig, axes = plt.subplots(
-        nrows=2, 
-        ncols=3,
-        figsize=(25,10) 
-    )
-fig.suptitle("Ill People", fontsize=16)
+
 
 def chart_top_ten(df, title, row, col, as_percent = False):
     topTen = df.max().sort_values(ascending=False).head(10).index.tolist()
@@ -42,6 +37,15 @@ def calculate_rate(df):
         df[col] /= population[col]
         df[col] *= 100
     return df
+
+logging.info("Running %s" % __file__)
+
+fig, axes = plt.subplots(
+        nrows=2, 
+        ncols=3,
+        figsize=(25,10) 
+    )
+fig.suptitle("Ill People", fontsize=16)
 
 df_confirmed = tools.get_timeline("Confirmed") 
 df_deaths = tools.get_timeline("Deaths") 

@@ -14,6 +14,8 @@ def build_timeseries(df_base):
     df_base = df_base.transpose()
     return df_base
 
+logging.info("Running %s" % __file__)
+
 # Load data from CSV
 df_confirmed = pd.read_csv('csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')  
 df_deaths = pd.read_csv('csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')  
