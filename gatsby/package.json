@@ -31,6 +31,7 @@
     "react-icons": "^3.9.0"
   },
   "devDependencies": {
+    "gatsby-plugin-goatcounter": "^0.3.1",
     "gh-pages": "^2.2.0",
     "prettier": "^1.17.0"
   },
