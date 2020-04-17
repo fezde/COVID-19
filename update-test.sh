@@ -3,9 +3,9 @@
 # Calc a md5 of the relevant data files 
 function md5s()
 {
-    M1=`$MD5_CMD -q csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv`
-    M2=`$MD5_CMD -q csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv`
-    M3=`$MD5_CMD -q csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv`
+    M1=`$MD5_CMD csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv`
+    M2=`$MD5_CMD csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv`
+    M3=`$MD5_CMD csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv`
     echo "$M1 $M2 $M3"
 }
 
@@ -18,7 +18,7 @@ if ! [ -x "$(command -v md5)" ]; then
         MD5_CMD="md5sum"
     fi
 else
-    MD5_CMD="md5"
+    MD5_CMD="md5 -q"
 fi
 
 # Get checksums before the git pull
