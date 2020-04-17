@@ -11,7 +11,9 @@ jobs:
     if: github.actor == github.event.repository.owner.login
 
     steps:
-       - name: Checkout repository
-         uses: actions/checkout@v2
-       - name: Execute update
-         run: ./update-test.sh
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Check for upstream
+        run: git remote -v   
+      - name: Execute update
+        run: ./update-test.sh
