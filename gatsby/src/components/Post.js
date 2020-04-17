@@ -18,8 +18,10 @@ class Post extends Component {
         const image = data.allFile.edges.find(
             edge => edge.node.name === this.props.image
         );
-        console.log(data);
+        console.log("render_data");
+        console.log(data); 
         console.log(image);
+        console.log(image_small);
 
         const img = <Col sm={12} lg={8}>
             <a
@@ -28,7 +30,7 @@ class Post extends Component {
                 onClick={(event) => { this.setState({ showOverlay: !this.state.showOverlay }); }}
                 href="#"
             >
-                <Image src={image_small.node.publicURL}
+                <Image src={image_small ? image_small.node.publicURL: "#"}
                     fluid
                 /><br />
 
@@ -86,7 +88,7 @@ class Post extends Component {
                     }}
                         onClick={(event) => { this.setState({ showOverlay: !this.state.showOverlay }); }}
                     >
-                        <Image src={image.node.publicURL}
+                        <Image src={image ? image.node.publicURL : "#"}
                             fluid
                             style={{
                                 maxWidth: "90vw",
@@ -117,16 +119,17 @@ class Post extends Component {
 
                 <StaticQuery
                     query={graphql`
-                query SiteTitleQueryFEZ {
-                    allFile(filter: {ext: {eq: ".png"}, sourceInstanceName: {eq: "charts"}}) {
-                        edges {
-                          node {
-                            publicURL
-                            name
+                    query SiteTitleQueryFEZ {
+                        allFile(filter: {sourceInstanceName: {eq: "charts"}, publicURL: {}, ext: {regex: "/gif|png/"}}) {
+                          edges {
+                            node {
+                              publicURL
+                              name
+                            }
                           }
                         }
                       }
-                }
+                      
                 `}
                     render={(data) => this.render_data(data)}
                 />
