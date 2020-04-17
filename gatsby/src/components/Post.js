@@ -18,19 +18,33 @@ class Post extends Component {
         const image = data.allFile.edges.find(
             edge => edge.node.name === this.props.image
         );
-        console.log("render_data");
-        console.log(data); 
-        console.log(image);
-        console.log(image_small);
+        // console.log("render_data");
+        // console.log(data); 
+        // console.log(image);
+        // console.log(image_small);
 
         const img = <Col sm={12} lg={8}>
             <a
                 name={this.props.anchor}
                 style={{ fontSize: "0.8em" }}
-                onClick={(event) => { this.setState({ showOverlay: !this.state.showOverlay }); }}
+                onClick={(event) => { 
+                    this.setState({ showOverlay: !this.state.showOverlay }); 
+
+                    const scrollPosition = window.pageYOffset;
+                    const offsetTop = document.getElementById(image_small.node.id).offsetTop;
+                    console.log(scrollPosition);
+                    console.log(offsetTop);
+                    document.getElementById(image_small.node.id).scrollIntoView();
+                    window.setTimeout(() => {
+                        console.log("Plopp");
+                        window.scroll(0, scrollPosition);
+                    }, 100);
+                }}
                 href="#"
             >
-                <Image src={image_small ? image_small.node.publicURL: "#"}
+                <Image 
+                    src={image_small ? image_small.node.publicURL: "#"}
+                    id = {image_small ? image_small.node.id: Math.random()}
                     fluid
                 /><br />
 
@@ -84,9 +98,12 @@ class Post extends Component {
                         top: 0,
                         left: 0,
                         zIndex: 1000,
+                        overscrollBehavior: "contain",
                         display: this.state.showOverlay ? "block" : "none"
                     }}
-                        onClick={(event) => { this.setState({ showOverlay: !this.state.showOverlay }); }}
+                        onClick={(event) => { 
+                            this.setState({ showOverlay: !this.state.showOverlay }); 
+                        }}
                     >
                         <Image src={image ? image.node.publicURL : "#"}
                             fluid
@@ -125,6 +142,7 @@ class Post extends Component {
                             node {
                               publicURL
                               name
+                              id
                             }
                           }
                         }
