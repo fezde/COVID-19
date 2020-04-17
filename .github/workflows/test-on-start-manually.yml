@@ -14,6 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Check for upstream
-        run: git remote -v   
+        run: git remote -v
+      - name: Add upstream
+        run: git remote add upstream https://github.com/CSSEGISandData/COVID-19
+      - name: Check if upstream is set now
+        run: git remote -v
       - name: Execute update
         run: ./update-test.sh
