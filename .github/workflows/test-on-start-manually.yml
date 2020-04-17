@@ -19,5 +19,7 @@ jobs:
         run: git remote add upstream https://github.com/CSSEGISandData/COVID-19
       - name: Check if upstream is set now
         run: git remote -v
+      - name: Git fetch
+        run: git fetch
       - name: Execute update
         run: ./update-test.sh
