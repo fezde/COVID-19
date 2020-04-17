@@ -1,7 +1,7 @@
 name: Test
 
 on:
-  watch
+  watch:
     types: [started]
 
 jobs:
