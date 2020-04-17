@@ -28,34 +28,7 @@ if [ "$MD_BEFORE" == "$MD_AFTER" ]; then
     fi
 fi
 
-
-# Calculate charts
-export DEBUG_LEVEL="INFO"
-python3 basic_numbers.py
-python3 rates.py
-python3 offsets.py
-python3 daily_changes.py
-python3 ill.py
-python3 opengraph_image.py
-
-python3 ip_map_animation.py
-MAPDIR="charts/ill_people_map"
-NOW=`date "+%Y%m%d-%H%M%S"`
-TMPFILE="$MAPDIR/ip_map-tmp.gif"
-MAPFILE="$MAPDIR/ip_map-$NOW.gif"
-CURRFILE="charts/_current/ip_map.gif"
-CURRFILE_SMALL="charts/_current/ip_map_small.gif"
-convert -delay 30 -loop 0 $MAPDIR/tmp/ip_map_2020-*.png "$TMPFILE"
-convert "$TMPFILE"  \( -clone -1 -set delay 500 \) "$MAPFILE"
-rm "$TMPFILE"
-cp "$MAPFILE" "$CURRFILE"
-convert "$CURRFILE" -scale 40% "$CURRFILE_SMALL"
-
-# Create page
-cd gatsby
-gatsby clean
-npm run deploy
-cd ..
+make all
 
 DATE=`date "+%Y-%m-%d-%H"`
 TAG="data-update_$DATE"
