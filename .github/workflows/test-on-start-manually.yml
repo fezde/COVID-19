@@ -13,4 +13,5 @@ jobs:
     steps:
        - name: Checkout repository
          uses: actions/checkout@v2
-        #  add more ...
+       - name: Execute update
+         run: ./update.sh
