@@ -24,6 +24,8 @@ function md5s()
     echo "$M1 $M2 $M3"
 }
 
+git config --local user.email "action@github.com"
+git config --local user.name "GitHub Action"
 
 # Get checksums before the git pull
 MD_BEFORE=$(md5s)
