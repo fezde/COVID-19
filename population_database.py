@@ -50,6 +50,7 @@ population = {
     "Russia": 144.5 * 1000000,
 
     "San Marino": 33400,
+    "Saudi Arabia": 33.7 * 1000000,
     "Singapore": 5.612 * 1000000,
     "Spain": 46.66 * 1000000,
     "Sweden": 10.12 * 1000000,
