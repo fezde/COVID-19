@@ -16,8 +16,10 @@ jobs:
       - name: Check for upstream
         run: git remote -v
       - name: Add upstream
-        run: git remote add upstream https://github.com/CSSEGISandData/COVID-19
+        run: git remote add upstream https://github.com/CSSEGISandData/COVID-19.git
       - name: Check if upstream is set now
         run: git remote -v
+      - name: Git fetch
+        run: git fetch
       - name: Execute update
         run: ./update-test.sh
