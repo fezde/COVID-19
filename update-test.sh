@@ -2,13 +2,25 @@
 DOWN_BASE_URL=https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/
 DATA_DIR=csse_covid_19_data/csse_covid_19_time_series/
 
+# find the correct md5 command
+MD5_CMD="thisshouldfail"
+if ! [ -x "$(command -v md5)" ]; then
+    if ! [ -x "$(command -v md5sum)" ]; then
+        echo 'Error: could not detect md5 or md5sum on the system' >&2
+        exit 1
+    else
+        MD5_CMD="md5sum"
+    fi
+else
+    MD5_CMD="md5 -q"
+fi
 
 # Calc a md5 of the relevant data files 
 function md5s()
 {
-    M1=`md5 -q "${DATA_DIR}time_series_covid19_confirmed_global.csv"`
-    M2=`md5 -q "${DATA_DIR}time_series_covid19_deaths_global.csv"`
-    M3=`md5 -q "${DATA_DIR}time_series_covid19_recovered_global.csv"`
+    M1=`$MD5_CMD "${DATA_DIR}time_series_covid19_confirmed_global.csv"`
+    M2=`$MD5_CMD "${DATA_DIR}time_series_covid19_deaths_global.csv"`
+    M3=`$MD5_CMD "${DATA_DIR}time_series_covid19_recovered_global.csv"`
     echo "$M1 $M2 $M3"
 }
 
