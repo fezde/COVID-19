@@ -25,7 +25,7 @@ function md5s()
 }
 
 git config --local user.email "action@github.com"
-git config --local user.name "GitHub Action"
+git config --local user.name "COVID-19 updater"
 
 # Get checksums before the git pull
 MD_BEFORE=$(md5s)
@@ -39,12 +39,6 @@ DOWN_FILE=time_series_covid19_deaths_global.csv
 curl -s "${DOWN_BASE_URL}${DOWN_FILE}" --output "${DATA_DIR}${DOWN_FILE}"
 DOWN_FILE=time_series_covid19_recovered_global.csv
 curl -s "${DOWN_BASE_URL}${DOWN_FILE}" --output "${DATA_DIR}${DOWN_FILE}"
-
-# This is just for testing gut publishing
-date > test.txt
-git add test.txt
-git commit -m "Testing pushing from action"
-git push
 
 # Get checksums after the git pull
 MD_AFTER=$(md5s)
