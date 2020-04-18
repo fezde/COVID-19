@@ -38,6 +38,12 @@ curl -s "${DOWN_BASE_URL}${DOWN_FILE}" --output "${DATA_DIR}${DOWN_FILE}"
 DOWN_FILE=time_series_covid19_recovered_global.csv
 curl -s "${DOWN_BASE_URL}${DOWN_FILE}" --output "${DATA_DIR}${DOWN_FILE}"
 
+# This is just for testing gut publishing
+date > test.txt
+git add test.txt
+git commit -m "Testing pushing from action"
+git push
+
 # Get checksums after the git pull
 MD_AFTER=$(md5s)
 if [ "$MD_BEFORE" == "$MD_AFTER" ]; then
