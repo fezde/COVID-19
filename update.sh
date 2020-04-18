@@ -2,6 +2,9 @@
 DOWN_BASE_URL=https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/
 DATA_DIR=csse_covid_19_data/csse_covid_19_time_series/
 
+git config --local user.email "action@github.com"
+git config --local user.name "COVID-19 updater"
+
 # find the correct md5 command
 MD5_CMD="thisshouldfail"
 if ! [ -x "$(command -v md5)" ]; then
