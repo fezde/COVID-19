@@ -44,6 +44,12 @@ df_ill = df_ill.transpose()
 
 merged = gdf.merge(df_ill, left_on='NAME_EN', right_on='Country/Region')
 
+if not os.path.isdir("charts/ill_people_map"):
+    os.mkdir("charts/ill_people_map")
+if not os.path.isdir("charts/ill_people_map/tmp"):
+    os.mkdir("charts/ill_people_map/tmp")
+
+
 total_per_day = {}
 
 for col in df_ill.columns:
