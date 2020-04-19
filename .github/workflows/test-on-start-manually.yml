@@ -13,9 +13,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Install setuptools
-        run: pip3 install setuptools
-      - name: Install wheel
+      - name: Install setuptools	
+        run: pip3 install setuptools	
+      - name: Install wheel	
         run: pip3 install wheel
       - name: Install required libs
         run: pip3 install -r requirements.txt
