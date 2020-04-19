@@ -14,4 +14,4 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Execute update
-        run: ./update-test.sh
+        run: ./update.sh
