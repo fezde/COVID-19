@@ -14,6 +14,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install required libs
-        run: pip3 -r requirements.txt
+        run: pip3 install -r requirements.txt
       - name: Execute update
         run: ./update.sh
