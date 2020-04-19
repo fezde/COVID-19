@@ -45,6 +45,3 @@ numpy == 1.18.1
 # COVID-19/rates.py: 1
 # COVID-19/tools.py: 13
 pandas == 1.0.1
-
-# COVID-19/gatsby/node_modules/node-gyp/gyp/setup.py: 7
-#setuptools == 46.0.0
