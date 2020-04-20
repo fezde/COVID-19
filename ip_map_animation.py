@@ -97,7 +97,7 @@ for col in df_ill.columns:
 
     merged[merged.isna().any(axis=1)].plot(ax=ax, color='#fafafa', hatch='///')
     ax.set_axis_off()
-    ax.get_legend().set_bbox_to_anchor((.155, .56))
+    ax.get_legend().set_bbox_to_anchor((.102, .52))
     ax.set_xlim([-1.5e7, 1.7e7])
     title_date = datetime.strptime(col, "%m/%d/%y").strftime("%d %b %Y")
     ax.set_title("Ill people (IP) as of %s" % title_date)
