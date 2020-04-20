@@ -3,6 +3,7 @@ import sys
 from os import path, mkdir, getenv
 from datetime import datetime
 import matplotlib as plt
+import matplotlib.font_manager as font_manager
 from shutil import copyfile
 from PIL import Image, ImageDraw, ImageFont
 from PIL.PngImagePlugin import  PngInfo
@@ -33,7 +34,8 @@ def save_tmp_chart(fig, fileName):
         bbox_inches='tight'
     )
 
-    fnt = ImageFont.truetype('/Library/Fonts/Arial Unicode.ttf', 15)
+    # fnt = ImageFont.truetype('/Library/Fonts/Arial Unicode.ttf', 15)
+    fnt = ImageFont.truetype('assets/Marvel-Regular.ttf', 15)
     
     img_orig = Image.open(fileName)
     img_new = Image.new('RGB', (img_orig.width, img_orig.height + 52), color = (255, 255, 255))
@@ -193,3 +195,11 @@ for c in tmpcc:
     newc = plt.colors.to_rgba(c)
     logging.debug("%s -> %s" % (c,newc))
     colorcycle.append(newc)
+
+# specify the custom font to use
+font_dirs = ['assets', ]
+font_files = font_manager.findSystemFonts(fontpaths=font_dirs)
+font_list = font_manager.createFontList(font_files)
+font_manager.fontManager.ttflist.extend(font_list)
+
+plt.rcParams['font.family'] = 'Marvel'
