@@ -16,6 +16,14 @@ def rename_country(df, country_from, country_to):
     df.at[index, "NAME_EN"] = country_to
     return df
 
+def check_for_missing_countries(data_jhu, geo_data):
+
+    l_df = data_jhu.index.tolist()
+    l_geo = geo_data["NAME_EN"].tolist()
+
+    not_in_geodb = list(filter(lambda x: x not in l_geo, l_df))
+    logging.warning("These countries exist in Johns Hopkins' data but not in the geo-db")
+    logging.warning(not_in_geodb)
 
 logging.info("Running %s" % __file__)
 
@@ -32,6 +40,21 @@ gdf = gpd.read_file(shapefile)[['NAME_EN', 'geometry']].to_crs('+proj=robin')
 # Rename Countries
 gdf = rename_country(gdf, "United States of America", "US")
 gdf = rename_country(gdf, "People's Republic of China", "China")
+gdf = rename_country(gdf, "The Bahamas", "Bahamas")
+gdf = rename_country(gdf, "Myanmar", "Burma")
+gdf = rename_country(gdf, "Ivory Coast", "Cote d'Ivoire")
+gdf = rename_country(gdf, "Cape Verde", "Cabo Verde")
+gdf = rename_country(gdf, "The Gambia", "Gambia")
+gdf = rename_country(gdf, "Czech Republic", "Czechia")
+gdf = rename_country(gdf, "Republic of Macedonia", "North Macedonia")
+gdf = rename_country(gdf, "eSwatini", "Eswatini")
+gdf = rename_country(gdf, "Taiwan", "Taiwan*")
+gdf = rename_country(gdf, "East Timor", "Timor-Leste")
+gdf = rename_country(gdf, "São Tomé and Príncipe", "Sao Tome and Principe")
+gdf = rename_country(gdf, "South Korea", "Korea, South")
+gdf = rename_country(gdf, "Democratic Republic of the Congo", "Congo (Kinshasa)")
+gdf = rename_country(gdf, "Republic of the Congo", "Congo (Brazzaville)")
+gdf = rename_country(gdf, "Vatican City", "Holy See")
 
 df_confirmed = tools.get_timeline("Confirmed")
 df_deaths = tools.get_timeline("Deaths")
@@ -41,8 +64,16 @@ df_ill = df_confirmed - df_deaths - df_recovered
 
 df_ill = df_ill.transpose()
 
+# Drop some ships
+df_ill.drop("Diamond Princess", inplace=True)
+df_ill.drop("MS Zaandam", inplace=True)
+# Ignore some countries
+
+
+check_for_missing_countries(df_ill, gdf)
 
 merged = gdf.merge(df_ill, left_on='NAME_EN', right_on='Country/Region')
+
 
 if not os.path.isdir("charts/ill_people_map"):
     os.mkdir("charts/ill_people_map")
@@ -73,6 +104,8 @@ for col in df_ill.columns:
             col, num_records, colors))
         continue
 
+    logging.info("Rendering %s" % file_name)
+
     fig = plt.figure(figsize=(16, 9))
     axes = fig.add_subplot(111)
     axes2 = fig.add_subplot(
@@ -97,7 +130,7 @@ for col in df_ill.columns:
 
     merged[merged.isna().any(axis=1)].plot(ax=ax, color='#fafafa', hatch='///')
     ax.set_axis_off()
-    ax.get_legend().set_bbox_to_anchor((.102, .52))
+    ax.get_legend().set_bbox_to_anchor((.112, .52))
     ax.set_xlim([-1.5e7, 1.7e7])
     title_date = datetime.strptime(col, "%m/%d/%y").strftime("%d %b %Y")
     ax.set_title("Ill people (IP) as of %s" % title_date)
@@ -135,3 +168,4 @@ for col in df_ill.columns:
 
     fig.tight_layout()
     tools.save_tmp_chart(fig, file_name)
+    plt.close(fig)
