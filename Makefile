@@ -1,21 +1,16 @@
-CHDIR_SHELL := $(SHELL)
-define chdir
-   $(eval _D=$(firstword $(1) $(@D)))
-   $(info $(MAKE): cd $(_D)) $(eval SHELL = cd $(_D); $(CHDIR_SHELL))
-endef
+
 
 NOW = $(shell date "+%Y%m%d-%H%M%S")
 export DEBUG_LEVEL = INFO
 
 gatsby/develop:
-	$(call chdir)
-	gatsby clean
-	yes | gatsby develop
+	cd gatsby; gatsby clean
+	cd gatsby; yes | gatsby develop
 
 gatsby/deploy:
-	$(call chdir)
-	gatsby clean
-	npm run deploy
+
+	cd gatsby; gatsby clean
+	cd gatsby; npm run deploy
 
 render_charts:
 	python3 basic_numbers.py
