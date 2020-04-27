@@ -8,7 +8,7 @@ gatsby/develop:
 	cd gatsby; yes | gatsby develop
 
 gatsby/deploy:
-
+	pwd
 	cd gatsby; gatsby clean
 	cd gatsby; npm run deploy
 
