@@ -5,6 +5,7 @@ population = {
     "Austria": 8.822 * 1000000,
 
     "Bahrain": 1.493 * 1000000,
+    'Belarus': 9.485 * 1000000,
     "Belgium": 11.3 * 1000000,
     "Brazil": 209.3 * 1000000,
 
@@ -41,10 +42,13 @@ population = {
     "Netherlands": 17.18 * 1000000,
     "Norway": 5.368 * 1000000, 
 
+    'Pakistan': 212.2 * 1000000,
     "Peru": 32.17 * 1000000,
     "Philippines": 104.9 * 1000000,
     "Poland": 37.98 * 1000000,
     "Portugal": 10.29 * 1000000,
+
+    'Qatar': 2.782 * 1000000,
 
     "Romania": 19.53 * 1000000,
     "Russia": 144.5 * 1000000,
