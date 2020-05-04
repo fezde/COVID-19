@@ -25,6 +25,10 @@ logging.getLogger('matplotlib.colorbar').setLevel(logging.INFO)
 logging.getLogger('numba.byteflow').setLevel(logging.INFO)
 logging.getLogger('numba.interpreter').setLevel(logging.INFO)
 
+fh = logging.FileHandler('warnings.log')
+fh.setLevel(logging.WARNING)
+logging.getLogger('').addHandler(fh)
+
 logging.debug("matplotlibrc is used from '%s'" % (plt.matplotlib_fname()))
 
 def save_tmp_chart(fig, fileName):
