@@ -64,6 +64,7 @@ population = {
     "Thailand": 69.04 * 1000000, 
     "Turkey": 80.81 * 1000000,
 
+    "Ukraine": 41.98 * 1000000,
     "United Arab Emirates": 9.4 * 1000000,
     "United Kingdom": 66.44 * 1000000,
     "US": 327.2 * 1000000,
